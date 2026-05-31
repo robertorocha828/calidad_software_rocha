@@ -2,7 +2,7 @@ const { sumaMayor100 } = require('./sumaMayor100');
 
 describe('promedio',()=>{
     test('Happy path: n=[5,5,5]=>5', ()=>{
-        expect(sumaMayor100([5,5,5])).toBe(0);
+        expect(sumaMayor100([5,5,5])).toBe(3);
     })
     test('Happy path: n=[6,6,6]=>6', ()=>{
         expect(sumaMayor100([6,6,6])).toBe(3);
