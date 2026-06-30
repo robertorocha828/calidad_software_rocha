@@ -33,7 +33,20 @@ describe('TodoItem', () => {
     expect(
       screen.getByRole('button', { name: 'Eliminar' }),
     ).toBeInTheDocument();
-  });   
+  });  
+  
+  describe('TodoItem · matchers', () => {
+  it('debería marcar el checkbox cuando la tarea está completada', () => {
+    // Arrange: tarea completada
+    const todo = crearTodo({ completed: true });
+    // Act
+    render(<TodoItem todo={todo} onToggle={() => {}} onDelete={() => {}} />);
+    // Assert: el checkbox debe estar marcado
+    expect(screen.getByRole('checkbox')).toBeChecked();
+  });
+});
+
+  
 
   
 
