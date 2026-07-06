@@ -18,8 +18,8 @@ export function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
         aria-label={`Marcar "${todo.text}"`}
       />
       <input
-      type="text"
-      value={todo.titulo}
+        type="text"
+        value={todo.titulo}
       />
       {/* El texto de la tarea */}
       <span>{todo.text}</span>

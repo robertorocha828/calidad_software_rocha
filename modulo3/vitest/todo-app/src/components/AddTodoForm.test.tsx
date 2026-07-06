@@ -11,33 +11,11 @@ describe('AddTodoForm · matchers', () => {
     expect(screen.getByRole('button', { name: 'Añadir' })).toBeDisabled();
   });
 
-  // src/components/AddTodoForm.test.tsx  (añade dentro del describe)
   it('debería empezar con el input vacío', () => {
     render(<AddTodoForm onAdd={() => {}} />);
     // toHaveValue('') confirma que el campo arranca vacío
     expect(screen.getByLabelText('Nueva tarea')).toHaveValue('');
     expect(screen.getByLabelText('Titulo')).toHaveValue('Programacion');
-  });
-
-  it('debería exponer el placeholder esperado (toHaveAttribute)', () => {
-    render(<AddTodoForm onAdd={() => {}} />);
-    // Comprobamos un atributo concreto con su valor
-    expect(screen.getByLabelText('Nueva tarea')).toHaveAttribute(
-      'placeholder',
-      '¿Qué hay que hacer?',
-    );
-  });
-
-  it('el input debería ser visible', () => {
-    render(<AddTodoForm onAdd={() => {}} />);
-    expect(screen.getByLabelText('Nueva tarea')).toBeVisible();
-  });
-
-  // src/components/AddTodoForm.test.tsx  (añade dentro del describe)
-  it('debería empezar con el input vacío', () => {
-    render(<AddTodoForm onAdd={() => {}} />);
-    // toHaveValue('') confirma que el campo arranca vacío
-    expect(screen.getByLabelText('Nueva tarea')).toHaveValue('');
   });
 
   it('debería exponer el placeholder esperado (toHaveAttribute)', () => {

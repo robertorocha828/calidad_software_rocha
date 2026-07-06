@@ -8,7 +8,6 @@ interface AddTodoFormProps {
 export function AddTodoForm({ onAdd }: AddTodoFormProps) {
   const [text, setText] = useState('');
   const [titulo, setTitulo] = useState('Programacion');
-
   // El botón se deshabilita si el input está vacío (sin contar espacios).
   const disabled = text.trim() === '';
 
@@ -26,6 +25,13 @@ export function AddTodoForm({ onAdd }: AddTodoFormProps) {
         id="new-todo"
         value={text}
         placeholder="¿Qué hay que hacer?"
+        onChange={(e) => setText(e.target.value)}
+      />
+      <label htmlFor="new-titulo">Titulo</label>
+      <input
+        id="new-titulo"
+        value={titulo}
+        placeholder="Escribe título"
         onChange={(e) => setText(e.target.value)}
       />
       <button type="submit" disabled={disabled}>

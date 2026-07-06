@@ -17,7 +17,13 @@ export function LoginForm({ onLogin }: LoginFormProps) {
   return (
     <form onSubmit={handleSubmit} aria-label="Formulario de acceso">
       {/* Label asociada por htmlFor + id → getByLabelText */}
-      <h1>Incluye usuario</h1>
+      <label htmlFor="adduser">Incluye Usuario</label>
+      <input
+        id="adduser"
+        value={username}
+        placeholder="Usuario"
+        onChange={(e) => setUsername(e.target.value)}
+      />
       <label htmlFor="username">Usuario</label>
       <input
         id="username"
@@ -25,7 +31,6 @@ export function LoginForm({ onLogin }: LoginFormProps) {
         placeholder="Tu usuario"
         onChange={(e) => setUsername(e.target.value)}
       />
-
       <label htmlFor="password">Contraseña</label>
       <input
         id="password"
@@ -37,7 +42,7 @@ export function LoginForm({ onLogin }: LoginFormProps) {
 
       <button type="submit">Entrar</button>
 
-      <a href='https://www.google.com'></a>
+      <a href = "https://www.google.com"> Ir a Google </a>
     </form>
   );
 }
