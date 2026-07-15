@@ -20,9 +20,12 @@ export default function PostsPage() {
 
   useEffect(() => { load() }, [])
 
-  const handleDelete = async (id: string) => {
-    await deletePost(id)
-    load()
+  const handleDelete = async () => {
+    if (!deleteTarget) return
+    await deletePost(deleteTarget.id)
+    showToast('Post eliminada', 'success')
+    setDeleteTarget(null)
+    fetchCategories()
   }
 
   return (

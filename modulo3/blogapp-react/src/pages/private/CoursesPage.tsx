@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import CourseFormDialog from '@/components/private/CourseFormDialog'
+import { useToastStore } from '@/store/toast.store'
+import ConfirmDialog from '@/components/ConfirmDialog'
 
 const ESTADO_STYLES: Record<string, string> = {
   activo: 'bg-emerald-100 text-emerald-700 hover:bg-emerald-100',
@@ -15,6 +17,8 @@ export default function CoursesPage() {
   const [courses, setCourses] = useState<Curso[]>([])
   const [editing, setEditing] = useState<Curso | null>(null)
   const [dialogOpen, setDialogOpen] = useState(false)
+  const showToast = useToastStore((s) => s.show)
+  const [deleteTarget, setDeleteTarget] = useState<Courses | null>(null)
 
   const load = async () => {
     const result = await getCourses(1, 50)
@@ -23,8 +27,11 @@ export default function CoursesPage() {
 
   useEffect(() => { load() }, [])
 
-  const handleDelete = async (id: string) => {
-    await deleteCourse(id)
+  const handleDelete = async () => {
+    if (!deleteTarget) return
+    await deleteCourses(deleteTarget.id)
+    showToast('Categoría eliminada', 'success')
+    setDeleteTarget(null)
     load()
   }
 
@@ -69,11 +76,12 @@ export default function CoursesPage() {
           ))}
         </TableBody>
       </Table>
-      <CourseFormDialog
-        open={dialogOpen}
-        onOpenChange={setDialogOpen}
-        course={editing}
-        onSaved={load}
+      <ConfirmDialog
+        open={!!deleteTarget}
+        onOpenChange={(open) => !open && setDeleteTarget(null)}
+        title="Eliminar categoría"
+        description={`¿Seguro que quieres eliminar "${deleteTarget?.name}"? Esta acción no se puede deshacer.`}
+        onConfirm={handleDelete}
       />
     </div>
   )
