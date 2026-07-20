@@ -6,3 +6,4 @@ export default function ProtectedRoute() {
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated)
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />
 }
+

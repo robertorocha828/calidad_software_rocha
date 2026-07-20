@@ -23,3 +23,13 @@ http.interceptors.response.use(
     return Promise.reject(error)
   },
 )
+
+http.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) useAuthStore.getState().logout()
+    const message = error.response?.data?.message ?? 'Ocurrió un error inesperado'
+    useToastStore.getState().show(Array.isArray(message) ? message.join(', ') : message, 'error')
+    return Promise.reject(error)
+  },
+)
